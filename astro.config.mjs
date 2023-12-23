@@ -8,5 +8,8 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://fastsnowy.github.io',
-  integrations: [mdx(), sitemap(), tailwind(), react()]
+  integrations: [mdx(), sitemap(), tailwind(), react()],
+  markdown: {
+    syntaxHighlight: "shiki",
+  }
 });

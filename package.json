@@ -16,12 +16,21 @@
     "@astrojs/rss": "^4.0.1",
     "@astrojs/sitemap": "^3.0.3",
     "@astrojs/tailwind": "^5.0.3",
+    "@fontsource-variable/noto-sans-jp": "^5.0.17",
+    "@resvg/resvg-js": "^2.6.0",
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.17",
     "astro": "^4.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "satori": "^0.10.11",
+    "satori-html": "^0.3.2",
     "tailwindcss": "^3.3.6",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.1",
+    "prettier-plugin-astro": "^0.12.2",
+    "prettier-plugin-tailwindcss": "^0.5.9"
   }
 }

@@ -1,0 +1,67 @@
+---
+import '@fontsource-variable/noto-sans-jp'
+
+import { ViewTransitions } from "astro:transitions"
+const { title, description, ogImage } = Astro.props
+---
+
+<html lang="ja" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="icon"
+      href="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/1f35a.svg"
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <!-- <HeadInfo title={title} description={description} ogImage={ogImage} /> -->
+    <ViewTransitions />
+    <script is:inline>
+      const setDarkMode = () => {
+        if (typeof window.localStorage.getItem("theme") === "string") {
+          const currentTheme = window.localStorage.getItem("theme")
+          if (currentTheme === "dark") {
+            document.documentElement.classList.add("dark")
+          } else if (currentTheme === "light") {
+            document.documentElement.classList.remove("dark")
+          } else {
+            document.documentElement.classList.toggle(
+              "dark",
+              window.matchMedia("(prefers-color-scheme: dark)").matches,
+            )
+          }
+        }
+        // localStorageになにもない時はmatchMediaで判定
+        if (
+          typeof window.localStorage.getItem("theme") !== "string" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches
+        ) {
+          document.documentElement.classList.add("dark")
+          // localStorageに保存
+          window.localStorage.setItem("theme", "dark")
+        }
+      }
+
+      // Runs on initial navigation
+      setDarkMode()
+      // Runs on view transitions navigation
+      document.addEventListener("astro:after-swap", setDarkMode)
+    </script>
+  </head>
+  <body class="bg-white dark:bg-[#15202B] text-gray-800 dark:text-slate-200">
+    <main
+      class="flex flex-col container mx-auto max-w-screen-lg max-h-full min-h-screen"
+    >
+      <!-- <Header /> -->
+      <div class="flex flex-wrap">
+        <slot />
+      </div>
+    </main>
+    <style is:global>
+      .btn-ghost {
+        @apply inline-flex items-center text-center justify-center content-center flex-wrap p-4 gap-4 rounded-md font-semibold leading-[1em] min-h-fit h-12 min-w-fit hover:bg-neutral-200 dark:hover:bg-neutral-700;
+      }
+    </style>
+  </body>
+</html>
